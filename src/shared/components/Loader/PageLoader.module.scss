@@ -1,0 +1,287 @@
+@use 'shared/styles/variables' as *;
+
+.loaderContainer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  z-index: $z-loader;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.starCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.loaderDeck {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 90%;
+  max-width: 600px;
+}
+
+.deckConsole {
+  width: 100%;
+  padding: 2.5rem 2rem;
+  background: rgba(4, 4, 8, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 
+    0 0 30px rgba(0, 240, 255, 0.1),
+    inset 0 0 20px rgba(0, 240, 255, 0.05),
+    0 20px 50px rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+// Technical corners
+.corner {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid transparent;
+  pointer-events: none;
+  
+  &.topLeft {
+    top: -1px;
+    left: -1px;
+    border-top-color: #00f0ff;
+    border-left-color: #00f0ff;
+  }
+  &.topRight {
+    top: -1px;
+    right: -1px;
+    border-top-color: #00f0ff;
+    border-right-color: #00f0ff;
+  }
+  &.bottomLeft {
+    bottom: -1px;
+    left: -1px;
+    border-bottom-color: #bd00ff;
+    border-left-color: #bd00ff;
+  }
+  &.bottomRight {
+    bottom: -1px;
+    right: -1px;
+    border-bottom-color: #bd00ff;
+    border-right-color: #bd00ff;
+  }
+}
+
+// Sweeping Scanline
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, transparent, #00f0ff, transparent);
+  opacity: 0.3;
+  animation: sweep 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sweep {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+// Console Header
+.consoleHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: $color-text-muted;
+  transform: translateZ(20px);
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #00f0ff;
+}
+
+.blinkDot {
+  width: 6px;
+  height: 6px;
+  background: #00f0ff;
+  border-radius: 50%;
+  animation: blink 1s ease-in-out infinite alternate;
+  box-shadow: 0 0 8px #00f0ff;
+}
+
+@keyframes blink {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.systemCore {
+  color: #bd00ff;
+}
+
+// Hologram Ring
+.holoRingWrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(30px);
+}
+
+.ringOuter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(0, 240, 255, 0.4);
+  border-radius: 50%;
+  animation: spinRing 8s linear infinite;
+}
+
+.ringInner {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border: 1.5px solid transparent;
+  border-top-color: #bd00ff;
+  border-bottom-color: #ff007a;
+  border-radius: 50%;
+  animation: spinRingBack 4s linear infinite;
+}
+
+.ringCenter {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  animation: pulseCenter 2s ease-in-out infinite alternate;
+}
+
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinRingBack {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes pulseCenter {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+// Glowing Header Text
+.holoText {
+  font-family: $font-oxanium;
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0;
+  transform: translateZ(40px);
+  background: linear-gradient(to right, #ffffff, #00f0ff, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+}
+
+// Progress Section
+.progressSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transform: translateZ(20px);
+}
+
+.progressBarWrap {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #00f0ff, #bd00ff);
+  transform-origin: left;
+  animation: loadProgress 2s cubic-bezier(0.1, 0.8, 0.1, 1) forwards;
+}
+
+@keyframes loadProgress {
+  0% { transform: scaleX(0); }
+  60% { transform: scaleX(0.7); }
+  100% { transform: scaleX(1); }
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: $color-text-muted;
+}
+
+.labelLeft {
+  color: rgba(0, 240, 255, 0.8);
+}
+
+.labelRight {
+  color: #ffffff;
+  animation: blinkText 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes blinkText {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+// Console Footer
+.consoleFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: $color-text-dim;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1rem;
+  transform: translateZ(10px);
+}

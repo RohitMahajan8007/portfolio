@@ -1,0 +1,100 @@
+@use 'shared/styles/variables' as *;
+@use 'shared/styles/mixins' as *;
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-full;
+  font-family: $font-primary;
+  font-size: $text-base;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.85em 2.2em;
+  overflow: hidden;
+  will-change: transform;
+  transition: box-shadow $transition-base;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  will-change: transform;
+}
+
+.shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn:hover .shimmer {
+  transform: translateX(180%) skewX(-15deg);
+}
+
+// Primary Variant
+.primary {
+  background: $color-gradient;
+  color: $color-text-primary;
+  border: none;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+
+  &:hover {
+    box-shadow: 0 8px 40px rgba(124, 58, 237, 0.55);
+  }
+}
+
+// Outline Variant
+.outline {
+  background: transparent;
+  color: $color-text-primary;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    border-color: $color-accent-primary;
+    background: rgba(124, 58, 237, 0.08);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+  }
+}
+
+// Ghost Variant
+.ghost {
+  background: rgba(255, 255, 255, 0.04);
+  color: $color-text-secondary;
+  border: 1px solid $color-border;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-primary;
+  }
+}
+
+// Small
+.sm {
+  font-size: $text-sm;
+  padding: 0.6em 1.5em;
+}
+
+// Large
+.lg {
+  font-size: $text-xl;
+  padding: 1em 2.8em;
+}
+
+

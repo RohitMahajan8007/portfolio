@@ -1,0 +1,134 @@
+@use 'shared/styles/variables' as *;
+
+.skillsSection {
+  position: relative;
+  width: 100vw;
+  padding: 5rem 1.5rem 5rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.sub {
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  color: #bd00ff;
+  text-shadow: 0 0 8px rgba(189, 0, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: $font-oxanium;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--color-text, #ffffff);
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+  transition: color 0.3s ease;
+}
+
+.grid {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  perspective: 1200px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  background: var(--glass-bg, rgba(5, 5, 8, 0.75));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  padding: 1.8rem;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    border-color: var(--glow-color);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+  }
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transform: translateZ(30px);
+}
+
+.cardIcon {
+  font-size: 1.8rem;
+}
+
+.cardTitle {
+  font-family: $font-oxanium;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text, #ffffff);
+  margin: 0;
+}
+
+.cardCount {
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  color: var(--color-text-muted, rgba(255, 255, 255, 0.4));
+  text-transform: uppercase;
+}
+
+.cardDivider {
+  height: 1px;
+  background: var(--glass-border, rgba(255, 255, 255, 0.1));
+  margin: 1.2rem 0;
+}
+
+.skillList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transform: translateZ(15px);
+}
+
+.skillItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: $font-oxanium;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.7));
+}
+
+.skillDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}

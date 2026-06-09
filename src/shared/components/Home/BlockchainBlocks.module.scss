@@ -1,0 +1,39 @@
+.blocksWrapper {
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blocksSvg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.innerBlock {
+  animation: floatBlocks 3s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.delay1 {
+  animation-delay: 0s;
+}
+
+.delay2 {
+  animation-delay: -1s;
+}
+
+.delay3 {
+  animation-delay: -2s;
+}
+
+@keyframes floatBlocks {
+  0% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(8px);
+  }
+}

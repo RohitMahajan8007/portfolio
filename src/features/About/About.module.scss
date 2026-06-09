@@ -1,0 +1,220 @@
+@use 'shared/styles/variables' as *;
+@use 'shared/styles/mixins' as *;
+
+.about {
+  background: var(--color-bg);
+  position: relative;
+  transition: background-color 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $color-accent-primary, transparent);
+    opacity: 0.3;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+
+  @include lg {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+.title {
+  @include max-md {
+    font-size: $text-4xl;
+  }
+}
+
+.body {
+  margin-top: $space-4;
+  max-width: 520px;
+}
+
+// Internship Badge
+.internBadge {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  @include glass(0.5, 12px);
+  padding: $space-4 $space-5;
+  border-radius: $radius-lg;
+  margin-top: $space-6;
+  border-color: rgba($color-accent-primary, 0.15);
+  width: fit-content;
+}
+
+.internIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-md;
+  background: linear-gradient(135deg, rgba($color-accent-primary, 0.2), rgba($color-accent-secondary, 0.15));
+  @include flex-center;
+  flex-shrink: 0;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    color: $color-accent-primary;
+  }
+}
+
+.internTitle {
+  font-weight: 600;
+  font-size: $text-base;
+  color: var(--color-text);
+}
+
+.internCompany {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+// Skill Pills
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-top: $space-6;
+  max-width: 540px;
+}
+
+.pill {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: $space-2 $space-3;
+  border-radius: $radius-full;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  color: var(--color-text-secondary);
+  transition: background $transition-base, border-color $transition-base, color $transition-base, transform $transition-fast;
+
+  &:hover {
+    background: rgba(0, 240, 255, 0.18);
+    border-color: rgba(0, 240, 255, 0.4);
+    color: var(--color-text);
+    transform: translateY(-2px);
+  }
+}
+
+// Right Column
+.right {
+  @include flex-col;
+  gap: $space-4;
+}
+
+.imageBox {
+  @include flex-col;
+  gap: $space-4;
+}
+
+.imageInner {
+  position: relative;
+  @include glass-card;
+  padding: $space-8;
+  @include flex-center;
+  flex-direction: column;
+  gap: $space-6;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.avatarGlow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba($color-accent-primary, 0.2) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.avatarInitials {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: $color-gradient;
+  @include flex-center;
+  font-size: $text-2xl;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 0 30px rgba($color-accent-primary, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.codeSnippet {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: $radius-md;
+  padding: $space-4;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+
+  pre {
+    font-family: $font-mono;
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    white-space: pre;
+    overflow: hidden;
+
+    &::first-line { color: $color-accent-secondary; }
+  }
+}
+
+// Stats Grid
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+}
+
+.statCard {
+  @include glass-card;
+  padding: $space-5 $space-4;
+  @include flex-col;
+  align-items: center;
+  gap: $space-1;
+  text-align: center;
+  transition: border-color $transition-base, transform $transition-base;
+
+  &:hover {
+    border-color: rgba($color-accent-primary, 0.25);
+    transform: translateY(-3px);
+  }
+}
+
+.statValue {
+  font-size: $text-3xl;
+  font-weight: 700;
+  @include gradient-text;
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+

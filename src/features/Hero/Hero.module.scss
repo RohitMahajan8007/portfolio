@@ -1,0 +1,312 @@
+@use 'shared/styles/variables' as *;
+@use 'shared/styles/mixins' as *;
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  @include flex-col;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: $color-bg-deep;
+}
+
+// Canvas Particle
+.canvas {
+  @include fill;
+  pointer-events: none;
+}
+
+// Gradient Mesh Background
+.gradientMesh {
+  @include fill;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 60%, rgba(59, 130, 246, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 80%, rgba(168, 85, 247, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+// Grid Overlay
+.gridOverlay {
+  @include fill;
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+// Floating Shapes
+.float {
+  position: absolute;
+  border-radius: $radius-xl;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.float1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  right: 5%;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(59, 130, 246, 0.05));
+  border: 1px solid rgba(124, 58, 237, 0.12);
+  backdrop-filter: blur(2px);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph 12s ease-in-out infinite;
+
+  @include max-lg {
+    width: 180px;
+    height: 180px;
+    top: 5%;
+    right: 2%;
+  }
+}
+
+.float2 {
+  width: 180px;
+  height: 180px;
+  bottom: 20%;
+  left: 3%;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(124, 58, 237, 0.04));
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(4px);
+  border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  animation: morph 16s ease-in-out infinite reverse;
+
+  @include max-lg {
+    display: none;
+  }
+}
+
+.float3 {
+  width: 80px;
+  height: 80px;
+  top: 30%;
+  right: 20%;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  border-radius: $radius-xl;
+  transform: rotate(20deg);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
+
+  @include max-md {
+    display: none;
+  }
+}
+
+.float4 {
+  width: 50px;
+  height: 50px;
+  bottom: 35%;
+  right: 12%;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: $radius-lg;
+  transform: rotate(-15deg);
+
+  @include max-md {
+    display: none;
+  }
+}
+
+// Content
+.content {
+  position: relative;
+  z-index: 2;
+  @include flex-col;
+  align-items: flex-start;
+  @include section-container;
+  padding-top: clamp(6rem, 12vw, 10rem);
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+  width: 100%;
+  max-width: 1280px;
+  gap: $space-4;
+}
+
+// Availability Badge
+.greet {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  @include glass(0.5, 12px);
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  font-size: $text-sm;
+}
+
+.greetDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+  animation: pulseGlow 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.greetText {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+}
+
+// Hello
+.helloLine {
+  font-size: $text-lg;
+  color: $color-text-muted;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-top: $space-2;
+}
+
+// Name
+.name {
+  font-size: $text-hero;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: $color-text-primary;
+  perspective: 800px;
+
+  // Each char spaced slightly
+  :global(.char) {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  @include max-md {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+}
+
+// Role
+.roleWrap {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-top: $space-2;
+}
+
+.roleTag {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  color: $color-accent-primary;
+  opacity: 0.7;
+}
+
+.role {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  @include gradient-text(linear-gradient(135deg, #c084fc, #60a5fa));
+}
+
+// Headline
+.headline {
+  max-width: 560px;
+  font-size: $text-2xl;
+  font-weight: 400;
+  line-height: 1.45;
+  color: $color-text-secondary;
+  margin-top: $space-2;
+
+  @include max-md {
+    font-size: $text-lg;
+    max-width: 100%;
+  }
+}
+
+// Buttons
+.btns {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-4;
+  margin-top: $space-4;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// Stats Row
+.statsRow {
+  display: flex;
+  align-items: center;
+  gap: $space-8;
+  margin-top: $space-6;
+  padding-top: $space-6;
+  border-top: 1px solid $color-border;
+  flex-wrap: wrap;
+}
+
+.stat {
+  @include flex-col;
+  gap: $space-1;
+}
+
+.statValue {
+  font-size: $text-3xl;
+  font-weight: 700;
+  line-height: 1;
+  @include gradient-text;
+}
+
+.statLabel {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+// Scroll Indicator
+.scrollIndicator {
+  position: absolute;
+  bottom: $space-8;
+  left: 50%;
+  transform: translateX(-50%);
+  @include flex-col;
+  align-items: center;
+  gap: $space-2;
+  cursor: none;
+  z-index: 2;
+
+  &:hover .scrollMouse {
+    border-color: $color-accent-primary;
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+  }
+}
+
+.scrollMouse {
+  width: 24px;
+  height: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: $radius-full;
+  @include flex-center;
+  transition: border-color $transition-base, box-shadow $transition-base;
+}
+
+.scrollWheel {
+  width: 3px;
+  height: 8px;
+  background: $color-accent-primary;
+  border-radius: $radius-full;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+.scrollLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+

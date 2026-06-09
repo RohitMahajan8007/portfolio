@@ -1,0 +1,28 @@
+.planetWrapper {
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 50%;
+
+  // Glow halo background
+  &::before {
+    content: '';
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.planetCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}

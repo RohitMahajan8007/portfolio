@@ -1,0 +1,42 @@
+.waveContainer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  will-change: transform;
+}
+
+.waveSvg {
+  width: 100%;
+  height: 8rem; // equivalent to h-32
+}
+
+.wavePath1 {
+  animation: waveAnimation 2s ease-in-out infinite;
+}
+
+.wavePath2 {
+  animation: waveAnimationReverse 2s ease-in-out infinite;
+}
+
+@keyframes waveAnimation {
+  0%, 100% {
+    d: path("M 0,50 Q 250,30 500,50 T 1000,50");
+  }
+  50% {
+    d: path("M 0,50 Q 250,70 500,50 T 1000,50");
+  }
+}
+
+@keyframes waveAnimationReverse {
+  0%, 100% {
+    d: path("M 0,50 Q 250,70 500,50 T 1000,50");
+  }
+  50% {
+    d: path("M 0,50 Q 250,30 500,50 T 1000,50");
+  }
+}

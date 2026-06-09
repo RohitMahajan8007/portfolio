@@ -1,0 +1,129 @@
+@use 'shared/styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.75rem;
+  z-index: 800;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+
+  @media (min-width: 1024px) {
+    top: 1.5rem;
+    left: auto;
+    right: 2rem;
+    width: auto;
+    padding: 0;
+    justify-content: flex-end;
+  }
+}
+
+.navInner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--glass-bg, rgba(5, 5, 8, 0.75));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border, rgba(0, 240, 255, 0.15));
+  border-radius: 9999px;
+  padding: 0.4rem;
+  box-shadow: var(--shadow-navbar);
+  pointer-events: auto;
+  gap: 0.2rem;
+  
+  // Mobile swipe layout
+  max-width: 95vw;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: none;
+    overflow: hidden;
+  }
+}
+
+.slidingPill {
+  position: absolute;
+  height: calc(100% - 0.8rem);
+  top: 0.4rem;
+  background: #ffffff;
+  border-radius: 9999px;
+  z-index: 0;
+  transition: left 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
+              width 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.25s ease;
+  will-change: left, width;
+}
+
+.navLink {
+  position: relative;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  font-family: $font-oxanium;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.65));
+  text-decoration: none;
+  z-index: 1;
+  transition: color 0.3s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    color: var(--color-text, #ffffff);
+  }
+
+  &.active {
+    color: #000000;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0.5rem 1.4rem;
+    font-size: 0.85rem;
+  }
+}
+
+.themeToggle {
+  background: transparent;
+  border: none;
+  font-size: 1.05rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  user-select: none;
+  outline: none;
+  border-left: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+  margin-left: 0.4rem;
+
+  &:hover {
+    transform: scale(1.15) rotate(15deg);
+  }
+}
+
+// Light theme specific navigation style overrides
+[data-theme='light'] {
+  .slidingPill {
+    background: #0f172a;
+  }
+  .navLink {
+    color: rgba(15, 23, 42, 0.65);
+    
+    &:hover {
+      color: #0f172a;
+    }
+
+    &.active {
+      color: #ffffff;
+    }
+  }
+}

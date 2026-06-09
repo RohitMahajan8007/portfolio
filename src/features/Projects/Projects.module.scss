@@ -1,0 +1,183 @@
+@use 'shared/styles/variables' as *;
+
+.projectsSection {
+  position: relative;
+  width: 100vw;
+  padding: 5rem 1.5rem 5rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.sub {
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  color: #bd00ff;
+  text-shadow: 0 0 8px rgba(189, 0, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: $font-oxanium;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--color-text, #ffffff);
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+  transition: color 0.3s ease;
+}
+
+.deck {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  perspective: 1200px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  background: var(--glass-bg, rgba(5, 5, 8, 0.75));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+
+  &:hover {
+    border-color: var(--glow-color);
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.12);
+  }
+}
+
+.cardNumber {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-family: $font-museo;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--color-text);
+  opacity: 0.05;
+  user-select: none;
+  transform: translateZ(20px);
+}
+
+.cardContent {
+  transform: translateZ(35px);
+  text-align: left;
+}
+
+.subtitle {
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  color: var(--glow-color);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.projectTitle {
+  font-family: $font-oxanium;
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  color: var(--color-text, #ffffff);
+  margin: 0 0 1rem 0;
+}
+
+.description {
+  font-family: $font-oxanium;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-weight: 200;
+  line-height: 1.6;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.7));
+  margin-bottom: 1.5rem;
+}
+
+.tagsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.6));
+  background: var(--color-surface-2, rgba(255, 255, 255, 0.03));
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.06));
+  border-radius: 4px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  transform: translateZ(50px);
+}
+
+.btnLive {
+  display: inline-block;
+  font-family: $font-oxanium;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--btn-color);
+  text-decoration: none;
+  border: 1px solid var(--btn-color);
+  padding: 0.5rem 1.4rem;
+  border-radius: 4px;
+  background: transparent;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  }
+}
+
+.btnGithub {
+  display: inline-block;
+  font-family: $font-oxanium;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.7));
+  text-decoration: none;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.2));
+  padding: 0.5rem 1.4rem;
+  border-radius: 4px;
+  background: transparent;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: var(--color-text, #ffffff);
+    border-color: var(--color-text, #ffffff);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}

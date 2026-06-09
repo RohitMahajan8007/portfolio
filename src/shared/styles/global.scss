@@ -1,0 +1,209 @@
+// Global Styles Entry — No @use needed here since partials handle their own imports
+// This file is the entry used in main.jsx
+
+// Import with @use (these are needed for variables/mixins used directly in THIS file)
+@use 'shared/styles/variables' as *;
+@use 'shared/styles/mixins' as *;
+
+// Import partials (each has their own @use internally)
+@use 'shared/styles/reset';
+@use 'shared/styles/typography';
+@use 'shared/styles/animations';
+
+// CSS Custom Properties
+:root {
+  --color-bg: #{$color-bg};
+  --color-bg-deep: #{$color-bg-deep};
+  --color-surface: #{$color-surface};
+  --color-surface-2: #{$color-surface-2};
+  --color-accent: #{$color-accent-primary};
+  --color-accent-2: #{$color-accent-secondary};
+  --color-accent-pink: #{$color-accent-pink};
+  --color-text: #{$color-text-primary};
+  --color-text-secondary: #{$color-text-secondary};
+  --color-text-muted: #{$color-text-muted};
+  --color-text-dim: #{$color-text-dim};
+  --color-border: #{$color-border};
+  --color-border-hover: #{$color-border-hover};
+  --font-primary: #{$font-primary};
+  --font-mono: #{$font-mono};
+  --font-oxanium: #{$font-oxanium};
+  --font-museo: #{$font-museo};
+  --glass-bg: rgba(5, 5, 8, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --hologrid-opacity: 0.8;
+  --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.5);
+  --shadow-hud: 0 15px 35px rgba(0, 0, 0, 0.5);
+  --shadow-navbar: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --ambient-orb-1: rgba(0, 240, 255, 0.03);
+  --ambient-orb-2: rgba(189, 0, 255, 0.03);
+}
+
+.font-oxanium { font-family: var(--font-oxanium), sans-serif; }
+.font-museo-moderno { font-family: var(--font-museo), sans-serif; }
+.font-museo-extralight { font-family: var(--font-museo), sans-serif; font-weight: 200; }
+.font-oxanium-light { font-family: var(--font-oxanium), sans-serif; font-weight: 300; }
+.font-oxanium-extralight { font-family: var(--font-oxanium), sans-serif; font-weight: 200; }
+
+/* 3D Utility Classes */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.custom-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+:root {
+  --content-height: 100vh;
+  --safe-area-left: 0px;
+  --safe-area-right: 0px;
+  --safe-area-top: 0px;
+  --safe-area-bottom: 0px;
+}
+
+[data-theme='light'] {
+  --color-bg: #f8fafc;
+  --color-bg-deep: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-surface-2: #f8fafc;
+  --color-text: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748b;
+  --color-text-dim: #94a3b8;
+  --color-border: rgba(0, 240, 255, 0.25);
+  --color-border-hover: rgba(0, 240, 255, 0.55);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --hologrid-opacity: 0.12;
+  --shadow-card: 0 20px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-hud: 0 15px 35px rgba(15, 23, 42, 0.06);
+  --shadow-navbar: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --ambient-orb-1: rgba(0, 240, 255, 0.06);
+  --ambient-orb-2: rgba(189, 0, 255, 0.06);
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  transition: background-color 0.3s ease;
+}
+
+body {
+  background-color: var(--color-bg);
+  background-image: 
+    radial-gradient(circle at 80% 20%, var(--ambient-orb-1), transparent 50%),
+    radial-gradient(circle at 20% 80%, var(--ambient-orb-2), transparent 50%);
+  color: var(--color-text);
+  overflow-x: hidden;
+  margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.section {
+  position: relative;
+  padding: clamp(5rem, 10vw, 9rem) 0;
+  overflow: hidden;
+}
+
+.container {
+  @include section-container;
+}
+
+.section__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $color-accent-primary;
+  margin-bottom: $space-4;
+
+  &::before {
+    content: '//';
+    opacity: 0.5;
+  }
+}
+
+.section__title {
+  font-size: $text-5xl;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text, #ffffff);
+  margin-bottom: $space-6;
+  transition: color 0.3s ease;
+
+  span {
+    @include gradient-text;
+  }
+}
+
+.section__subtitle {
+  font-size: $text-lg;
+  line-height: 1.7;
+  color: var(--color-text-muted, rgba(255, 255, 255, 0.5));
+  max-width: 600px;
+  transition: color 0.3s ease;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: $color-gradient;
+  border-radius: $radius-full;
+  margin: $space-6 0;
+}
+
+.glass-card {
+  @include glass-card;
+  padding: $space-8;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    @include pseudo;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), transparent);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.gradient-bg {
+  background: linear-gradient(-45deg, #050508, #0d0a1a, #050514, #08050e);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.overflow-clip {
+  overflow: hidden;
+  display: block;
+}
